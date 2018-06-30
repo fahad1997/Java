@@ -45,7 +45,7 @@ public class MeenaBazar {
         for(int i=0;i<n;i++)
         {
             System.out.println("Product id:"+p[i].getId()+" "+"Productt name:"+p[i].getP_name());
-            System.out.println("Product price:"+p[i].getPrice());
+            System.out.println("Product price:"+p[i].getPrice()+"  "+"Amount:"+p[i].getQuantity());
         }
         
         String NumberOfProductId[] = new String[n];
@@ -53,6 +53,9 @@ public class MeenaBazar {
         int np=input.nextInt();
         input.nextLine();
         
+        boolean forward=true;
+        while(forward)
+        {
         double total_price=0.0;
         for(int l=0;l<np;l++)
         {
@@ -67,8 +70,9 @@ public class MeenaBazar {
             {
                 if(p[i].getId().equalsIgnoreCase(NumberOfProductId[l]))
                 {
-                    if(p[i].getQuantity()>amount)
+                    if(p[i].checkProduct(amount))
                     {
+                        p[i].setQuantity(amount);
                         total_price=total_price+p[i].getPrice()*amount;
                         check=false;
                     }
@@ -102,5 +106,18 @@ public class MeenaBazar {
             }
             k++;
         }
+        
+            System.out.println("Do you want to continue[Y/N]: ");
+            String cont=input.nextLine();
+            if(cont.equalsIgnoreCase("y"))
+            {
+                forward=true;
+               for(int i=0;i<n;i++)
+               {
+                   System.out.println("Product id:"+p[i].getId()+" "+"Productt name:"+p[i].getP_name());
+                   System.out.println("Product price:"+p[i].getPrice()+"  "+"Amount:"+p[i].getQuantity());
+               }
+            }
    }
+    }
 }
